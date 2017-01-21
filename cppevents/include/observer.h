@@ -4,15 +4,14 @@
 #include <listener_interface.h>
 #include <event_manager.h>
 
-class Observer : public listener_interface<std::string*>
+class Observer : public listener_interface<const std::string&>
 {
 public:
-    Observer()
+    Observer() : listener_interface(event_manager::on_start)
     {
-        event_manager::on_start.subscribe(this);
     }
-    void on_invoke(std::string* arg) override
+    void on_invoke(const std::string& arg) override
     {
-        std::cout << *arg;
+        std::cout << arg;
     }
 };

@@ -7,8 +7,9 @@
 class event_manager
 {
 public:
-    static event<std::string*> on_start;
+    static event<const std::string&> on_start;
+    static event<std::string&> on_test;
 };
-event<std::string*> event_manager::on_start;
+event<const std::string&> event_manager::on_start;
 
 #endif
