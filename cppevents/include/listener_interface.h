@@ -24,3 +24,14 @@ private:
     event<T...>* event;
 };
 #endif
+
+/* original version
+
+template<typename... T>
+class listener_interface
+{
+public:
+    virtual void on_invoke(T... args) = 0;
+};
+
+*/

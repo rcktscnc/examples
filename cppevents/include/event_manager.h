@@ -8,7 +8,6 @@ class event_manager
 {
 public:
     static event<const std::string&> on_start;
-    static event<std::string&> on_test;
 };
 event<const std::string&> event_manager::on_start;
 
