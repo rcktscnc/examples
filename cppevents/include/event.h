@@ -1,23 +1,21 @@
-#ifndef __EVENT_H
-#define __EVENT_H
+#ifndef ___EVENT_H___
+#define ___EVENT_H___
 
 #include <vector>
 #include <algorithm>
 
 #include <listener_interface.h>
 
-template<typename... T>
+template<typename ReturnType = void, typename... Args>
 class event
 {
 public:
-    typedef listener_interface<T...> listener_type;
-    
-    void subscribe(listener_type* listener)
+    void subscribe(listener_t* listener)
     {
         _listeners.push_back(listener);
     }
     
-    void unsubscribe(listener_type* listener)
+    void unsubscribe(listener_t* listener)
     {
         auto rit = std::find(_listeners.rbegin(), _listeners.rend(), listener);
         if (rit != _listeners.rend())
@@ -29,19 +27,27 @@ public:
         _listeners.clear();
     }
 
-    void invoke(T... args)
+    template<typename Func>
+    void invoke(Args... args, Func func)
+    {
+        for (auto e : _listeners)
+            func(e->on_invoke(args...));
+    }
+
+    void invoke(Args... args)
     {
         for (auto e : _listeners)
             e->on_invoke(args...);
     }
 
-    size_t count()
+    std::size_t count()
     {
         return _listeners.size();
     }
-    
+
 private:
-    std::vector<listener_type*> _listeners;
+    typedef listener_interface<ReturnType, Args...> listener_t;
+    std::vector<listener_t*> _listeners;
 };
 
 #endif
