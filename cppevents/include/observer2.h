@@ -1,24 +1,21 @@
 #include <iostream>
 #include <string>
 
-#include <listener_interface.h>
-#include <event_manager.h>
+#include <subject.h>
 
-class Observer2 : public listener_interface<std::string, const std::string&>
+class Observer2
 {
 public:
     Observer2()
     {
-        event_manager::on_start.subscribe(this);
+        auto f = [](std::string arg) { return arg; };
+        subscription_id = Subject::on_request.subscribe(f);
     }
 
     ~Observer2()
     {
-        event_manager::on_start.unsubscribe(this);
+        Subject::on_request.unsubscribe(subscription_id);
     }
-    
-    std::string on_invoke(const std::string& arg) override
-    {
-        return arg + " from inside listener! ";
-    }
+private:
+    std::size_t subscription_id;
 };

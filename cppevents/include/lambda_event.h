@@ -53,7 +53,7 @@ public:
     }
 
 private:
-    typedef std::pair<std::size_t, std::function<ReturnType(Args...)>> _pair_t;
+    using _pair_t = std::pair<std::size_t, std::function<ReturnType(Args...)>>;
     std::vector<_pair_t> _listeners;
     std::size_t _subscription_id = 0;
 };

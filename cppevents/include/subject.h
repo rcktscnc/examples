@@ -1,13 +1,22 @@
+#ifndef ___SUBJECT_H___
+#define ___SUBJECT_H___
+
 #include <string>
 
-#include <event_manager.h>
+#include <lambda_event.h>
 
 class Subject
 {
 public:
+    static lambda_event<std::string, const std::string&> on_request;
+
     void invoke(std::string message)
     {
-        event_manager::on_start.invoke(message);
+        on_request.invoke(message);
     }
+
 private:
+    
 };
+
+#endif

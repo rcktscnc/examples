@@ -5,6 +5,7 @@
 #include <observer2.h>
 #include <event_manager.h>
 #include <lambda_event.h>
+#include <subject.h>
 
 #include <sstream>
 
@@ -20,36 +21,17 @@ namespace patch
 
 int main(int argc, char** argv)
 {
-    /*
+    Subject sub;
+
     Observer2 ob2;
-    event_manager::on_start.subscribe(&ob2);
-    event_manager::on_start.subscribe(&ob2);
-    event_manager::on_start.subscribe(&ob2);
-    event_manager::on_start.subscribe(&ob2);
+    Observer2 ob22;
 
-    std::string result_string;
-
-    auto func = [&result_string](const std::string& arg) -> void
+    auto f = [](std::string arg)
     {
-        static int x = 0;
-        result_string += arg + patch::to_string(x) + "\n";
-        ++x;
+        std::cout << arg + " ";
     };
 
-    event_manager::on_start.invoke("This method was called", func);
+    sub.on_request.invoke("HAR", f);
 
-    std::cout << result_string;
-
-    std::cout << "\nEnd.";
-    */
-
-    Observer ob;
-    Observer ob2;
-    std::cout << ob.x;
-    std::cout << ob2.x;
-    event_manager::on_lambda.invoke(42);
-
-    std::cout << ob.x;
-    std::cout << ob2.x;
     return 0;
 }

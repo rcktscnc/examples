@@ -10,7 +10,7 @@ template<typename ReturnType = void, typename... Args>
 class event
 {
 public:
-    typedef listener_interface<ReturnType, Args...> listener_t;
+    using listener_t = listener_interface<ReturnType, Args...> ;
 
     void subscribe(listener_t* listener)
     {
