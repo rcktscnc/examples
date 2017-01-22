@@ -12,7 +12,7 @@ int main(int argc, char** argv)
     Subject s;
     Observer o;
     Observer2 o2;
-
+    
     s.invoke("COOL MESSAGE!\n");
     
     std::cout << "End.";

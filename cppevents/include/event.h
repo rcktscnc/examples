@@ -11,6 +11,7 @@ class event
 {
 public:
     typedef listener_interface<T...> listener_type;
+    
     void subscribe(listener_type* listener)
     {
         _listeners.push_back(listener);
@@ -38,7 +39,7 @@ public:
     {
         return _listeners.size();
     }
-
+    
 private:
     std::vector<listener_type*> _listeners;
 };

@@ -9,6 +9,5 @@ class event_manager
 public:
     static event<const std::string&> on_start;
 };
-event<const std::string&> event_manager::on_start;
 
 #endif
