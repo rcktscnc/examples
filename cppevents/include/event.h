@@ -10,6 +10,8 @@ template<typename ReturnType = void, typename... Args>
 class event
 {
 public:
+    typedef listener_interface<ReturnType, Args...> listener_t;
+
     void subscribe(listener_t* listener)
     {
         _listeners.push_back(listener);
@@ -46,7 +48,6 @@ public:
     }
 
 private:
-    typedef listener_interface<ReturnType, Args...> listener_t;
     std::vector<listener_t*> _listeners;
 };
 
