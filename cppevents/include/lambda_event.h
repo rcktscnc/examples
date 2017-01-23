@@ -19,7 +19,7 @@ public:
 
     void unsubscribe(std::size_t subscription_id)
     {
-        auto predicate = [&subscription_id](const _pair_t& e) -> bool
+        auto predicate = [subscription_id](const _pair_t& e) -> bool
         {
             return e.first == subscription_id;
         };
@@ -37,13 +37,13 @@ public:
     template<typename Func>
     void invoke(Args... args, Func func)
     {
-        for (auto e : _listeners)
+        for (auto& e : _listeners)
             func(e.second(args...));
     }
 
     void invoke(Args... args)
     {
-        for (auto e : _listeners)
+        for (auto& e : _listeners)
             e.second(args...);
     }
 

@@ -6,6 +6,7 @@ class listener_interface
 {
 public:
     virtual ReturnType on_invoke(Args... args) = 0;
+    virtual ~listener_interface() {}
 };
 
 #endif
