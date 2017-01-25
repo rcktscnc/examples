@@ -10,20 +10,19 @@ template<typename ReturnType = void, typename... Args>
 class lambda_event
 {
 public:
+    enum class id_type : std::size_t {};
+
     template<typename Func>
-    std::size_t subscribe(Func&& func)
+    id_type subscribe(Func&& func)
     {
-        _listeners.push_back(std::make_pair(_subscription_id, func));
-        return _subscription_id++;
+        auto id = _acquire_id();
+        _listeners.push_back(std::make_pair(id, func));
+        return id;
     }
 
-    void unsubscribe(std::size_t subscription_id)
+    void unsubscribe(id_type subscription_id)
     {
-        auto predicate = [subscription_id](const _pair_t& e) -> bool
-        {
-            return e.first == subscription_id;
-        };
-
+        auto predicate = [subscription_id](const _pair_t& e) { return e.first == subscription_id; };
         auto it = std::find_if(_listeners.begin(), _listeners.end(), predicate);
         if (it != _listeners.end())
             _listeners.erase(it);
@@ -53,9 +52,20 @@ public:
     }
 
 private:
-    using _pair_t = std::pair<std::size_t, std::function<ReturnType(Args...)>>;
+    using _pair_t = std::pair<id_type, std::function<ReturnType(Args...)>>;
+
     std::vector<_pair_t> _listeners;
-    std::size_t _subscription_id = 0;
+    id_type _subscription_id;
+
+    id_type _acquire_id()
+    {
+        auto const id = _subscription_id;
+        _subscription_id = static_cast<id_type>(static_cast<std::size_t>(_subscription_id) + 1);
+        return id;
+    }
 };
+
+template<typename ReturnType = void, typename... Args>
+using id_type = typename lambda_event<ReturnType, Args...>::id_type;
 
 #endif

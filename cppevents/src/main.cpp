@@ -12,34 +12,24 @@
 
 namespace patch
 {
-    template < typename T > std::string to_string( const T& n )
+    template <typename T>
+    std::string to_string(const T& n)
     {
-        std::ostringstream stm ;
-        stm << n ;
-        return stm.str() ;
+        std::ostringstream stm;
+        stm << n;
+        return stm.str();
     }
 }
 
+std::string ff(const std::string& arg) { return arg; }
+
 int main(int argc, char** argv)
 {
-    /*
-    microclock mc;
-    Subject sub;
-
-    Observer2 ob2;
-    Observer2 ob22;
-
-    auto f = [](std::string arg)
-    {
-        std::cout << arg + " ";
-    };
-    
-    sub.on_request.invoke("HAR", f);
-
-    std::cout << "\ntime: " << mc.elapsed();
-    */
-    Observer ob;
-
-    std::cout << ob.x;
+    typename lambda_event<std::string, const std::string&>::id_type id = Subject::on_request.subscribe(ff);
+    id = Subject::on_request.subscribe(ff);
+    id = Subject::on_request.subscribe(ff);
+    id = Subject::on_request.subscribe(ff);
+    id = Subject::on_request.subscribe(ff);
+    std::cout << (unsigned int)id << "\n";
     return 0;
 }
