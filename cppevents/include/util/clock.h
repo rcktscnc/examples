@@ -3,6 +3,9 @@
 
 #include <chrono>
 
+namespace util
+{
+
 template<typename TimeUnit>
 class low_latency_clock
 {
@@ -31,4 +34,6 @@ using nanoclock = low_latency_clock<std::chrono::nanoseconds>;
 using microclock = low_latency_clock<std::chrono::microseconds>;
 using milliclock = low_latency_clock<std::chrono::milliseconds>;
 
-#endif
+} // namespace
+
+#endif // ___CLOCK_H___

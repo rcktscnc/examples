@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 
-#include <listener_interface.h>
 #include <event_manager.h>
 
 class Observer

@@ -9,14 +9,14 @@ public:
     Observer2()
     {
         auto f = [](const std::string& arg) { return arg; };
-        subscription_id = Subject::on_request.subscribe(f);
+        subscription = Subject::subscribe(f);
     }
     
     ~Observer2()
     {
-        //Subject::on_request.unsubscribe(subscription_id);
+        Subject::unsubscribe(subscription);
     }
     
 private:
-    id_type<std::string, const std::string&> subscription_id;
+    util::subscription subscription;
 };
