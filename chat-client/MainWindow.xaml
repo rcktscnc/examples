@@ -1,0 +1,90 @@
+﻿<Window x:Class="WpfApplication1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+        mc:Ignorable="d"
+        Title="Messenger" Height="250" Width="400"
+        
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        Background="#FF232323"
+        MinHeight="100"
+        MinWidth="300" BorderBrush="#FF191919" BorderThickness="1"
+        >
+
+    <Grid Margin="10,10,10,10">
+
+        <DockPanel Margin="0,-10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19">
+            <Menu DockPanel.Dock="Top" Background="{x:Null}" Foreground="Black" Margin="0">
+                <MenuItem Header="_File" Foreground="#FF9C9C9C" Background="#FF232323" Margin="0">
+                    <MenuItem Header="_Exit" Click="menu_exit" Margin="0" Foreground="#FF5D5D5D" Background="White"/>
+                </MenuItem>
+                <MenuItem Header="_About" Foreground="#FF9C9C9C" Background="#FF232323" Margin="0">
+                    <MenuItem Header="_Messenger V.0.1" Margin="0" Foreground="#FF5D5D5D" Background="White"/>
+                </MenuItem>
+            </Menu>
+            <TextBox AcceptsReturn="True" />
+        </DockPanel>
+
+
+        <ScrollViewer x:Name="text_block_output_scroll"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Margin="1,10,122,43" Background="#FF1F1F1F">
+            <RichTextBox x:Name="text_box_output"
+                     HorizontalAlignment="Left"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     
+                     IsReadOnly="True"
+                     Foreground="#FF9C9C9C"
+                     Block.LineHeight="0.1">
+                <FlowDocument>
+                    <Paragraph Padding="0,1,0,0"/>
+                </FlowDocument>
+            </RichTextBox>
+        </ScrollViewer>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                Margin="0,12,0,41" HorizontalAlignment="Right" Width="122">
+            <TextBlock x:Name="text_block_users"
+                       HorizontalAlignment="Left"
+                       TextWrapping="Wrap"
+                       Width="94" Foreground="#FF9C9C9C" Margin="10,0,0,0"/>
+        </ScrollViewer>
+
+        <TextBox x:Name="text_box_input"
+                 Height="36"
+                 Margin="0,0,122,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Bottom"
+                 KeyDown="text_box_input_keydown"
+                 Background="#FF323232" Foreground="#FF9C9C9C" CaretBrush="White" SelectionBrush="Black" BorderThickness="0"/>
+
+        <Button x:Name="button_send"
+                Content="Send"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Width="99"
+                Height="36"
+                Click="button_send_click"
+                Background="#FF424242"
+                Foreground="White"
+                BorderBrush="{x:Null}"
+                Opacity="0.2"
+                Margin="0,0,18,0"/>
+        
+        <Button x:Name="button"
+                Content="Button"
+                HorizontalAlignment="Left"
+                Margin="276,154,0,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Click="test1"/>
+
+    </Grid>
+</Window>
